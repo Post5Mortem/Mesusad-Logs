@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unauthorized Access Detected | Mesusad Republic</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <div class="login-container">
+        <div class="image-placeholder" aria-hidden="true">
+            <img src="image/MSRP_logo.png" alt="MSRP logo">
+        </div>
+
+        <h1 class="title">Mesusad Republic Official Logs Sec-80</h1>
+
+        <form id="login-form" autocomplete="off">
+            <div class="input-group">
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="ENTER PASSCODE" 
+                    autofocus> 
+                    </div>
+
+            <div id="error-msg" class="error-msg" role="status" aria-live="polite" style="display:none"></div>
+
+            <button type="submit" class="access-button">
+                [ INIT CHECK ]
+            </button>
+        </form>
+
+        <p class="footer-text">Unauthorized access is a federal offense. Proceed with caution.</p>
+    </div>
+
+    <script>
+        (function(){
+            const form = document.getElementById('login-form');
+            const pw = document.getElementById('password');
+            const correctPassword = '47-ALPHA-ZION';
+            const container = document.querySelector('.login-container');
+            const err = document.getElementById('error-msg');
+
+            form.addEventListener('submit', function(e){
+                e.preventDefault();
+                const val = pw.value.trim().toUpperCase();
+
+                if(val === correctPassword){
+                    // subtle transition then navigate
+                    container.style.transition = 'opacity 260ms ease';
+                    container.style.opacity = '0.06';
+                    setTimeout(()=> window.location.href = 'AccessGranted.html', 260);
+                } else {
+                    // show inline error and shake container
+                    err.textContent = 'ACCESS DENIED — incorrect passcode.';
+                    err.style.display = 'block';
+                    container.classList.remove('shake');
+                    // force reflow to allow repeated animation
+                    void container.offsetWidth;
+                    container.classList.add('shake');
+                    // clear password for security
+                    pw.value = '';
+                    pw.focus();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
